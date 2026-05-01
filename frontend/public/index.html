@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TeamTask — Project Manager</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<!-- ── Auth Screen ───────────────────────────────────── -->
+<div id="auth-screen" class="screen">
+  <div class="auth-card">
+    <div class="logo"><span>Team</span>Task</div>
+    <p class="auth-sub">Collaborate. Assign. Deliver.</p>
+
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="switchAuthTab('login')">Login</button>
+      <button class="tab-btn" onclick="switchAuthTab('signup')">Sign Up</button>
+    </div>
+
+    <!-- Login -->
+    <div id="login-form">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="arjun@team.dev" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="••••••••" />
+      </div>
+      <div class="hint-box">
+        Demo → <strong>arjun@team.dev</strong> / admin123 &nbsp;|&nbsp; <strong>priya@team.dev</strong> / member123
+      </div>
+      <button class="btn-primary full" onclick="login()">Login</button>
+    </div>
+
+    <!-- Signup -->
+    <div id="signup-form" style="display:none">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="signup-name" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="signup-email" placeholder="you@team.dev" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="signup-password" placeholder="Min 6 characters" />
+      </div>
+      <button class="btn-primary full" onclick="signup()">Create Account</button>
+    </div>
+
+    <div id="auth-error" class="error-msg" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ── App Screen ────────────────────────────────────── -->
+<div id="app-screen" class="screen" style="display:none">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="logo"><span>Team</span>Task</div>
+    <div class="topbar-right">
+      <div class="user-pill" id="user-pill"></div>
+      <button class="icon-btn" onclick="logout()" title="Logout">⏻</button>
+    </div>
+  </header>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <button class="nav-btn active" onclick="navigate('dashboard')">Dashboard</button>
+    <button class="nav-btn" onclick="navigate('tasks')">Tasks</button>
+    <button class="nav-btn" onclick="navigate('projects')">Projects</button>
+    <button class="nav-btn" onclick="navigate('team')">Team</button>
+  </nav>
+
+  <!-- Pages -->
+  <main class="main-content">
+
+    <!-- Dashboard -->
+    <section id="page-dashboard" class="page">
+      <div class="stats-grid" id="stats-grid"></div>
+      <div class="section-header">
+        <h2>My Tasks</h2>
+      </div>
+      <div id="my-tasks-list"></div>
+      <div class="section-header" style="margin-top:24px">
+        <h2>Projects</h2>
+      </div>
+      <div id="projects-overview"></div>
+    </section>
+
+    <!-- Tasks -->
+    <section id="page-tasks" class="page" style="display:none">
+      <div class="section-header">
+        <h2>Tasks</h2>
+        <button class="btn-primary admin-only" onclick="openModal('task')" style="display:none">+ New Task</button>
+      </div>
+      <div class="filter-row" id="task-filters"></div>
+      <div id="tasks-list"></div>
+    </section>
+
+    <!-- Projects -->
+    <section id="page-projects" class="page" style="display:none">
+      <div class="section-header">
+        <h2>Projects</h2>
+        <button class="btn-primary admin-only" onclick="openModal('project')" style="display:none">+ New Project</button>
+      </div>
+      <div id="projects-list"></div>
+    </section>
+
+    <!-- Team -->
+    <section id="page-team" class="page" style="display:none">
+      <div class="section-header"><h2>Team Members</h2></div>
+      <div id="team-list"></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ── Modals ────────────────────────────────────────── -->
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal(event)" style="display:none">
+  <div class="modal">
+    <div class="modal-title" id="modal-title"></div>
+    <div id="modal-body"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModalDirect()">Cancel</button>
+      <button class="btn-confirm" id="modal-confirm">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
